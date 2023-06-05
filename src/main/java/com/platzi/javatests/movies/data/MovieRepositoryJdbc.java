@@ -31,8 +31,8 @@ public class MovieRepositoryJdbc implements MovieRepository {
     @Override
     public void saveOrUpdate(Movie movie) {
 
-        jdbcTemplate.update("insert into movies (name, minutes, genre) values (?, ?, ?)",
-                movie.getName(), movie.getMinutes(), movie.getGenre().toString());
+        jdbcTemplate.update("insert into movies (name, minutes, genre,director) values (?, ?, ?, ?)",
+                movie.getName(), movie.getMinutes(), movie.getGenre().toString(),movie.getDirector());
     }
 
     private static RowMapper<Movie> movieMapper = (rs, rowNum) ->
@@ -40,5 +40,6 @@ public class MovieRepositoryJdbc implements MovieRepository {
                 rs.getInt("id"),
                 rs.getString("name"),
                 rs.getInt("minutes"),
-                Genre.valueOf(rs.getString("genre")));
+                Genre.valueOf(rs.getString("genre")),
+                rs.getString("director"));
 }
