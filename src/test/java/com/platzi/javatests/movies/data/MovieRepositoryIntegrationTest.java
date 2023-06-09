@@ -48,6 +48,7 @@ public class MovieRepositoryIntegrationTest {
                 new Movie(2, "Memento", 113, Genre.THRILLER,"Director"),
                 new Movie(3, "Matrix", 136, Genre.ACTION,"Director")
 
+
         )) );
     }
 

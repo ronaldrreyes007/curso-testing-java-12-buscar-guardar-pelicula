@@ -32,7 +32,7 @@ public class MovieServiceShould {
                         new Movie(4, "Super 8", 112, Genre.THRILLER,"Director"),
                         new Movie(5, "Scream", 111, Genre.HORROR,"Director"),
                         new Movie(6, "Home Alone", 103, Genre.COMEDY,"Director"),
-                        new Movie(7, "Matrix", 136, Genre.ACTION,"Director")
+                        new Movie(7, "Matrix", 150, Genre.ACTION,"Director")
                 )
         );
 
@@ -63,6 +63,18 @@ public class MovieServiceShould {
     public void return_movies_by_director() {
         Collection<Movie> movies = movieService.findMoviesByDirector("director");
         assertThat(getMovieIds(movies),CoreMatchers.is(Arrays.asList(1,2,3,4,5,6,7)));
+    }
+    @Test
+    public void return_movies_duration_120_genered_Action(){
+        String name = null; // no queremos buscar por nombre
+        Integer minutes = 150; // 2h 30m
+        Genre genre = Genre.ACTION;
+        String director="Director";
+        Movie template = new Movie(name, minutes, genre,director);
+        Collection<Movie> movies =
+                movieService.findMoviesByTemplate(template);
+        assertThat(getMovieIds(movies), CoreMatchers.is(Arrays.asList(1,7)) );
+
     }
 
     private List<Integer> getMovieIds(Collection<Movie> movies) {

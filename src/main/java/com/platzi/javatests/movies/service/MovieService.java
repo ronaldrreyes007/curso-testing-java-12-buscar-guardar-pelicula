@@ -47,4 +47,20 @@ public class MovieService {
 
         return  moviesFound;
     }
+    public Collection<Movie> findMoviesByTemplate(Movie template) {
+
+        Collection<Movie> allMovies = movieRepository.findAll();
+        Collection<Movie> moviesFound= new ArrayList<>();
+
+        for (Movie movie: allMovies){
+
+            if (movie.getGenre() == template.getGenre()&&movie.getMinutes()>=template.getMinutes()){
+                moviesFound.add(movie);
+            }
+
+
+        }
+        return  moviesFound;
+
+    }
 }
